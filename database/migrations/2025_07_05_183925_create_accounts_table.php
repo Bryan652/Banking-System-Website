@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +14,11 @@ return new class extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->string('account_number')->unique();
+            $table->enum('account_type', ['Savings', 'Checking', 'Salary', 'Joint', 'Student']);
+            $table->decimal('balance', 15, 2)->default(0);
+            $table->enum('status', ['Active', 'Suspended', 'Closed']);
             $table->timestamps();
         });
     }
