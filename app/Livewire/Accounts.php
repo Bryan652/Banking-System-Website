@@ -10,8 +10,10 @@ class Accounts extends Component
     public function render()
     {
         $account = auth()->user()->accounts;
+        $user = auth()->user();
         return view('livewire.accounts', [
-            'account' => $account
+            'account' => $account,
+            'user' => $user
         ]);
     }
 }
