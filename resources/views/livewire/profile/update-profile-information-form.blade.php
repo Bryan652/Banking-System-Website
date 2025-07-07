@@ -10,6 +10,7 @@ new class extends Component
 {
     public string $name = '';
     public string $email = '';
+    public string $address= '';
 
     /**
      * Mount the component.
@@ -18,6 +19,7 @@ new class extends Component
     {
         $this->name = Auth::user()->name;
         $this->email = Auth::user()->email;
+        $this->address = Auth::user()->address;
     }
 
     /**
@@ -30,6 +32,7 @@ new class extends Component
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
+            'address' => ['required', 'string', 'max:255'],
         ]);
 
         $user->fill($validated);
@@ -84,7 +87,6 @@ new class extends Component
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input wire:model="email" id="email" name="email" type="email" class="mt-1 block w-full" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
-
             @if (auth()->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! auth()->user()->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
@@ -102,6 +104,12 @@ new class extends Component
                     @endif
                 </div>
             @endif
+        </div>
+
+        <div>
+            <x-input-label for="address" :value="__('address')" />
+            <x-text-input wire:model="address" id="address" name="address" type="text" class="mt-1 block w-full" required autocomplete="address" />
+            <x-input-error class="mt-2" :messages="$errors->get('address')" />
         </div>
 
         <div class="flex items-center gap-4">

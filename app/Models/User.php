@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'address',
     ];
 
     /**
@@ -48,6 +49,10 @@ class User extends Authenticatable
 
 
     public function accounts() {
-        return $this->hasMany(accounts::class, 'account_id');
+        return $this->hasMany(accounts::class);
+    }
+
+    public function loans() {
+        return $this->hasMany(loans::class, 'user_id');
     }
 }
