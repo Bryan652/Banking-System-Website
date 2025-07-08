@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->decimal('amount', 12, 2);
-            $table->decimal('interest_rate', 5, 2);
+            $table->decimal('interest_rate', 5, 2)->nullable();
             $table->integer('term_months');
             $table->enum('status', ['Pending', 'Approved', 'Paid']);
             $table->foreignIdFor(admins::class)->nullable();
