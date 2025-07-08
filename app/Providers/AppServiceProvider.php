@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,5 +23,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::unguard();
         Model::preventLazyLoading();
+
+        Gate::define('edit-user', function ($user) {
+            return $user->role === 'admin';
+        });
     }
 }
