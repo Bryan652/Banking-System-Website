@@ -8,7 +8,11 @@ class Loan extends Component
 {
     public $amount, $interest_rate, $term_months, $status;
 
-
+    protected $rules = [
+        'amount' => 'required|decimal',
+        'term_months' => '',
+        'status' => '',
+    ];
 
     public function render()
     {
