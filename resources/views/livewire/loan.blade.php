@@ -1,3 +1,3 @@
 <div>
-    Test
+    Used of livewire
 </div>
