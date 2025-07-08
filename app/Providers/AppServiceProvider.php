@@ -24,7 +24,15 @@ class AppServiceProvider extends ServiceProvider
         Model::unguard();
         Model::preventLazyLoading();
 
-        Gate::define('edit-user', function ($user) {
+        Gate::define('view-admin', function ($user) {
+            return $user->role === 'admin';
+        });
+
+        Gate::define('edit-approve', function ($user) {
+            return $user->role === 'admin';
+        });
+
+        Gate::define('edit-audit', function ($user) {
             return $user->role === 'admin';
         });
     }

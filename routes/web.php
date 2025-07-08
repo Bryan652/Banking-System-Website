@@ -27,20 +27,11 @@ Route::view('createAccount', 'createAccount')
 
 // Admins
 
-Route::get('/admin', function() {
-    return view('admin');
+Route::middleware(['auth', 'verified', 'can:view-admin'])->group(function () {
+    Route::get('/admin', function() { return view('admin'); });
+    Route::view('admin', 'admin')->name('admin');
+    Route::view('approval', 'approval')->name('approval');
+    Route::view('audit', 'audit')->name('audit');
 });
-
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
-
-Route::view('approval', 'approval')
-    ->middleware(['auth', 'verified'])
-    ->name('approval');
-
-Route::view('audit', 'audit')
-    ->middleware(['auth', 'verified'])
-    ->name('audit');
 
 require __DIR__.'/auth.php';

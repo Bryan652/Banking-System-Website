@@ -26,7 +26,6 @@
     <table class="min-w-full text-sm">
         <thead class="border-b border-gray-700 text-gray-300">
             <tr>
-                <th class="text-left py-2 px-4">Name</th>
                 <th class="text-left py-2 px-4">Account #</th>
                 <th class="text-left py-2 px-4">Account type</th>
                 <th class="text-left py-2 px-4">Balance</th>
@@ -39,7 +38,6 @@
 
         @foreach ($account->take(5) as $acc)
             <tr class="hover:bg-gray-800">
-                <td class="py-2 px-4 font-medium">{{ $acc->user_id }}</td>
                 <td class="py-2 px-4">{{ $acc->account_number }}</td>
                 <td class="py-2 px-4">{{ $acc->account_type }}</td>
                 <td class="py-2 px-4">{{ $acc->balance }}</td>
