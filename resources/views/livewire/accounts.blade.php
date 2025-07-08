@@ -5,7 +5,7 @@
 
         <balance class="ml-auto mr-40 flex flex-col justify-center items-center">
             <div>Total Balance</div>
-            <div class="text-3xl font-bold">PHP 12,000</div>
+            <div class="text-3xl font-bold">{{ number_format($total, 2) }}</div>
         </balance>
     </div>
 

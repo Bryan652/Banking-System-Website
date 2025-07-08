@@ -20,6 +20,10 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
+Route::view('createAccount', 'createAccount')
+    ->middleware(['auth'])
+    ->name('createAccount');
+
 
 // Admins
 

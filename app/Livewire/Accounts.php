@@ -17,13 +17,16 @@ class Accounts extends Component
 
         $transactions = $user1->accounts->pluck('transaction')->flatten();
 
+        $totalBalance = $user->accounts->sum('balance');
+
         $loans = auth()->user()->loans;
 
         return view('livewire.accounts', [
             'account' => $account,
             'user' => $user,
             'transaction' => $transactions,
-            'loans' => $loans
+            'loans' => $loans,
+            'total' => $totalBalance,
         ]);
     }
 }
