@@ -36,34 +36,31 @@
         </thead>
 
         <tbody class="divide-y divide-gray-800">
-    {{-- First 5 items --}}
-    @foreach ($account->take(5) as $acc)
-        <tr class="hover:bg-gray-800">
-            <td class="py-2 px-4 font-medium">{{ $acc->user_id }}</td>
-            <td class="py-2 px-4">{{ $acc->account_number }}</td>
-            <td class="py-2 px-4">{{ $acc->account_type }}</td>
-            <td class="py-2 px-4">{{ $acc->balance }}</td>
-            <td class="py-2 px-4">{{ $acc->status }}</td>
-            <td class="py-2 px-4 text-right"></td>
-        </tr>
-    @endforeach
 
-    {{-- Remaining items --}}
-    @foreach ($account->skip(5) as $acc)
-        <tr class="hover:bg-gray-800" x-show="showAll" x-cloak>
-            <td class="py-2 px-4 font-medium">{{ $acc->user_id }}</td>
-            <td class="py-2 px-4">{{ $acc->account_number }}</td>
-            <td class="py-2 px-4">{{ $acc->account_type }}</td>
-            <td class="py-2 px-4">{{ $acc->balance }}</td>
-            <td class="py-2 px-4">{{ $acc->status }}</td>
-            <td class="py-2 px-4 text-right"></td>
-        </tr>
-    @endforeach
-</tbody>
+        @foreach ($account->take(5) as $acc)
+            <tr class="hover:bg-gray-800">
+                <td class="py-2 px-4 font-medium">{{ $acc->user_id }}</td>
+                <td class="py-2 px-4">{{ $acc->account_number }}</td>
+                <td class="py-2 px-4">{{ $acc->account_type }}</td>
+                <td class="py-2 px-4">{{ $acc->balance }}</td>
+                <td class="py-2 px-4">{{ $acc->status }}</td>
+                <td class="py-2 px-4 text-right"></td>
+            </tr>
+        @endforeach
+
+        @foreach ($account->skip(5) as $acc)
+            <tr class="hover:bg-gray-800" x-show="showAll" x-cloak>
+                <td class="py-2 px-4 font-medium">{{ $acc->user_id }}</td>
+                <td class="py-2 px-4">{{ $acc->account_number }}</td>
+                <td class="py-2 px-4">{{ $acc->account_type }}</td>
+                <td class="py-2 px-4">{{ $acc->balance }}</td>
+                <td class="py-2 px-4">{{ $acc->status }}</td>
+                <td class="py-2 px-4 text-right"></td>
+            </tr>
+        @endforeach
+    </tbody>
 
     </table>
-
-        {{-- Toggle button --}}
             @if ($account->count() > 5)
                 <div class="mt-4 text-center">
                     <button
@@ -79,18 +76,86 @@
     </div>
 
     <div class="flex mt-5 gap-4">
-    <div class="flex flex-1 justify-start bg-gray-900 h-40 items-start rounded-lg p-4">
-        <div class="text-white text-lg font-semibold">
-            Transactions
+        {{-- Transactions Card --}}
+        <div class="flex flex-col flex-1 bg-gray-900 rounded-lg p-4">
+            <div class="text-white text-lg font-semibold mb-2">Transaction</div>
+
+            {{-- Set a fixed height and enable scroll --}}
+            <div class="overflow-y-auto max-h-[10.5rem]"> {{-- 3 rows x ~4.5rem --}}
+                <table class="min-w-full text-sm text-left text-gray-300">
+                    <thead class="bg-gray-800 text-gray-200 sticky top-0">
+                        <tr>
+                            <th class="py-3 px-4">Account ID</th>
+                            <th class="py-3 px-4">Type</th>
+                            <th class="py-3 px-4">Amount</th>
+                            <th class="py-3 px-4">Description</th>
+                            <th class="py-3 px-4">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-700 bg-gray-900">
+                        @foreach ($transaction as $item)
+                            <tr class="hover:bg-gray-800">
+                                <td class="py-3 px-4">{{ $item->accounts_id }}</td>
+                                <td class="py-3 px-4">{{ $item->type }}</td>
+                                <td class="py-3 px-4">{{ number_format($item->amount, 2) }}</td>
+                                <td class="py-3 px-4">{{ $item->description }}</td>
+                                <td class="py-3 px-4">{{ $item->created_at }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        {{-- Loans Card --}}
+        <div class="flex flex-col flex-1 bg-gray-900 rounded-lg p-4">
+            <div class="text-white text-lg font-semibold mb-2">Loans</div>
+
+            {{-- Set a fixed height and enable scroll --}}
+            <div class="overflow-y-auto max-h-[10.5rem]"> {{-- 3 rows x ~4.5rem --}}
+                <table class="min-w-full text-sm text-left text-gray-300">
+                    <thead class="bg-gray-800 text-gray-200 sticky top-0">
+                        <tr>
+                            <th class="py-3 px-4">Account ID</th>
+                            <th class="py-3 px-4">Amount</th>
+                            <th class="py-3 px-4">Interest Rate</th>
+                            <th class="py-3 px-4">Term Months</th>
+                            <th class="py-3 px-4">status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-700 bg-gray-900">
+                        @foreach ($loans as $item)
+                            <tr class="hover:bg-gray-800">
+                                <td class="py-3 px-4">{{ $item->user_id }}</td>
+                                <td class="py-3 px-4">{{ number_format($item->amount, 2) }}</td>
+                                <td class="py-3 px-4">{{ $item->interest_rate }}</td>
+                                <td class="py-3 px-4">{{ $item->term_months }}</td>
+
+                                @php
+                                    $statusStyles = [
+                                        'Approved'  => 'bg-green-500/20 text-green-300',
+                                        'Pending'   => 'bg-yellow-500/20 text-yellow-300',
+                                        'Paid'      => 'bg-blue-500/20 text-blue-300',
+                                        'Suspended' => 'bg-red-500/20 text-red-300',
+                                    ];
+
+                                    $style = $statusStyles[$item->status] ?? 'bg-gray-500/20 text-gray-300';
+                                @endphp
+
+                                <td class="py-3 px-4">
+                                    <span class="px-3 py-1 rounded-full text-sm font-medium {{ $style }}">
+                                        {{ $item->status }}
+                                    </span>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
-    <div class="flex flex-1 justify-start bg-gray-900 h-40 items-start rounded-lg p-4">
-        <div class="text-white text-lg font-semibold">
-            Loans
-        </div>
-    </div>
-</div>
+
 
 
 </div>
