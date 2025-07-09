@@ -9,35 +9,40 @@ use Livewire\Component;
 
 class Admin extends Component
 {
-
     public $search = '';
+    public $copiedSearch = '';
+
+    public function copySearch()
+    {
+        $this->copiedSearch = $this->search;
+    }
+
     public function render()
     {
-        $userAccounts = Cache::remember("userAccounts.search.{$this->search}", now()->addMinutes(5), function () {
-            return accounts::with('user')
-                ->whereHas('user', function ($query) {
-                    $query->where('role', '!=', 'admin')
-                        ->where('name', 'like', '%' . $this->search . '%');
-            })->get();
-        });
+       $searchTerm = $this->search;
 
-        $adminAccounts = Cache::remember("adminAccounts.search.{$this->search}", now()->addMinutes(5), function() {
-            return accounts::with('user')
-                ->whereHas('user', function ($query) {
-                    $query->where('role', 'admin')
-                        ->where('name', 'like', '%' . $this->search . '%');
+        $userAccounts = accounts::with('user')
+            ->whereHas('user', function ($query) use ($searchTerm) {
+                $query->where('role', '!=', 'admin')
+                    ->where('name', 'like', '%' . $searchTerm . '%');
             })->get();
-        });
 
-        $staffAccounts = Cache::remember("staffAccounts.search.{$this->search}", now()->addMinutes(5), function() {
-            return accounts::with('user')
-            ->whereHas('user', function ($query) {
+        $adminAccounts = accounts::with('user')
+            ->whereHas('user', function ($query) use ($searchTerm) {
+                $query->where('role', 'admin')
+                    ->where('name', 'like', '%' . $searchTerm . '%');
+            })->get();
+
+        $staffAccounts = accounts::with('user')
+            ->whereHas('user', function ($query) use ($searchTerm) {
                 $query->where('role', 'staff')
-                    ->where('name', 'like', '%' . $this->search . '%');
+                    ->where('name', 'like', '%' . $searchTerm . '%');
             })->get();
-        });
 
-
-        return view('livewire.admin', compact('userAccounts', 'adminAccounts', 'staffAccounts'));
+        return view('livewire.admin', [
+            'userAccounts' => $userAccounts,
+            'adminAccounts' => $adminAccounts,
+            'staffAccounts' => $staffAccounts,
+        ]);
     }
 }
