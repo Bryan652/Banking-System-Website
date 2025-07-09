@@ -15,12 +15,14 @@ return new class extends Migration
     {
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->foreignId('borrower_id')->constrained()->cascadeOnDelete(); // this is role->user who will get the loan
+
             $table->decimal('amount', 12, 2);
             $table->decimal('interest_rate', 5, 2)->nullable();
             $table->integer('term_months');
             $table->enum('status', ['Pending', 'Approved', 'Paid']);
-            $table->foreignIdFor(admins::class)->nullable();
+
+            $table->foreignId('approved_by')->nullable()->constrained('users')->nullOnDelete(); // this is role->admin
             $table->timestamps();
         });
     }

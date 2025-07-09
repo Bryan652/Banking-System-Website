@@ -52,8 +52,12 @@ class User extends Authenticatable
         return $this->hasMany(accounts::class);
     }
 
-    public function loans() {
-        return $this->hasMany(loans::class, 'user_id');
+    public function borrower() {
+        return $this->hasMany(loans::class, 'borrower_id');
+    }
+
+    public function adminLoan() {
+        return $this->hasMany(loans::class, 'approved_by');
     }
 
     public function approval() {

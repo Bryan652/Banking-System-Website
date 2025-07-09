@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\admins;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +16,7 @@ return new class extends Migration
         Schema::create('approvals', function (Blueprint $table) {
             $table->id();
             $table->enum('type', ['Loan', 'Transfer']);
-            $table->foreignIdFor(admins::class);
+            $table->foreignIdFor(User::class)->nullable();
             $table->enum('status', ['Approved', 'Rejected', 'Pending']);
             $table->text('remarks');
             $table->dateTime('updated_at');
