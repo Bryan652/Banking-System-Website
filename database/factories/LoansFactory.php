@@ -24,7 +24,9 @@ class LoansFactory extends Factory
             'interest_rate' => fake()->randomFloat(1, 0, 99),
             'term_months' => fake()->numberBetween(1, 12),
             'status' => fake()->randomElement(['Pending', 'Approved', 'Paid']),
-            'admin_id' => admins::factory(),
+            'admins_id' => user::factory()->state([
+                'role' => 'admin',
+            ]),
             'created_at' => now()
         ];
     }
