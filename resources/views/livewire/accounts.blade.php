@@ -36,7 +36,7 @@
 
         <tbody class="divide-y divide-gray-800">
 
-        @foreach ($account->take(5) as $acc)
+        @foreach ($account->take(5) ?? [] as $acc)
             <tr class="hover:bg-gray-800">
                 <td class="py-2 px-4">{{ $acc->account_number }}</td>
                 <td class="py-2 px-4">{{ $acc->account_type }}</td>
@@ -46,7 +46,7 @@
             </tr>
         @endforeach
 
-        @foreach ($account->skip(5) as $acc)
+        @foreach ($account->skip(5) ?? [] as $acc)
             <tr class="hover:bg-gray-800" x-show="showAll" x-cloak>
                 <td class="py-2 px-4 font-medium">{{ $acc->user_id }}</td>
                 <td class="py-2 px-4">{{ $acc->account_number }}</td>
@@ -91,7 +91,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-700 bg-gray-900">
-                        @foreach ($transaction as $item)
+                        @foreach ($transaction ?? [] as $item)
                             <tr class="hover:bg-gray-800">
                                 <td class="py-3 px-4">{{ $item->accounts_id }}</td>
                                 <td class="py-3 px-4">{{ $item->type }}</td>
@@ -122,7 +122,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-700 bg-gray-900">
-                        @foreach ($loans as $item)
+                        @foreach ($loans ?? [] as $item)
                             <tr class="hover:bg-gray-800">
                                 <td class="py-3 px-4">{{ $item->user_id }}</td>
                                 <td class="py-3 px-4">{{ number_format($item->amount, 2) }}</td>

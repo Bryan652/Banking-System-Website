@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('borrower_id')->constrained()->cascadeOnDelete(); // this is role->user who will get the loan
+            $table->foreignId('borrower_id')->constrained('users')->cascadeOnDelete(); // this is role->user who will get the loan
 
             $table->decimal('amount', 12, 2);
             $table->decimal('interest_rate', 5, 2)->nullable();

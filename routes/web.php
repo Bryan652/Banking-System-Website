@@ -30,6 +30,7 @@ Route::view('createAccount', 'createAccount')
 Route::middleware(['auth', 'verified', 'can:view-admin'])->group(function () {
     Route::get('/admin', function() { return view('admin'); });
     Route::view('admin', 'admin')->name('admin');
+    Route::view('adminLoan', 'adminLoan')->name('adminLoan');
     Route::view('approval', 'approval')->name('approval');
     Route::view('audit', 'audit')->name('audit');
 });

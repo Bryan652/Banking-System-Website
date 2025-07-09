@@ -19,14 +19,12 @@ class LoansFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
+            'borrower_id' => User::factory(),
             'amount' => fake()->randomFloat(2, 0, 99999),
             'interest_rate' => fake()->randomFloat(1, 0, 99),
             'term_months' => fake()->numberBetween(1, 12),
             'status' => fake()->randomElement(['Pending', 'Approved', 'Paid']),
-            'admins_id' => user::factory()->state([
-                'role' => 'admin',
-            ]),
+            'approved_by' => null,
             'created_at' => now()
         ];
     }

@@ -10,7 +10,11 @@ class loans extends Model
     /** @use HasFactory<\Database\Factories\LoansFactory> */
     use HasFactory;
 
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function borrower() {
+        return $this->belongsTo(User::class, 'borrower_id');
+    }
+
+    public function admin() {
+        return $this->belongsTo(User::class, 'approved_by');
     }
 }

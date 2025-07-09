@@ -14,6 +14,13 @@ class Loan extends Component
         'status' => '',
     ];
 
+    public $role;
+
+    public function mount()
+    {
+        $this->role = auth()->user()->role;
+    }
+
     public function render()
     {
         return view('livewire.loan');

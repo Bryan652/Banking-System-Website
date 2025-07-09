@@ -29,8 +29,8 @@
                     @forelse ($userAccounts as $index => $item)
                         <tr class="hover:bg-gray-800">
                             <td class="py-2 px-4">{{ $index + 1 }}</td>
-                            <td class="py-2 px-4">{{ $item->user->name }}</td>
-                            <td class="py-2 px-4">{{ $item->user->email }}</td>
+                            <td class="py-2 px-4">{{ $item->name }}</td>
+                            <td class="py-2 px-4">{{ $item->email }}</td>
                         </tr>
                     @empty
                         <tr>
@@ -61,8 +61,8 @@
                     @forelse ($adminAccounts as $index => $item)
                         <tr class="hover:bg-gray-800">
                             <td class="py-2 px-4">{{ $index + 1 }}</td>
-                            <td class="py-2 px-4">{{ $item->user->name }}</td>
-                            <td class="py-2 px-4">{{ $item->user->email }}</td>
+                            <td class="py-2 px-4">{{ $item->name }}</td>
+                            <td class="py-2 px-4">{{ $item->email }}</td>
                         </tr>
                     @empty
                         <tr>
@@ -93,8 +93,8 @@
                     @forelse ($staffAccounts as $index => $item)
                         <tr class="hover:bg-gray-800">
                             <td class="py-2 px-4">{{ $index + 1 }}</td>
-                            <td class="py-2 px-4">{{ $item->user->name }}</td>
-                            <td class="py-2 px-4">{{ $item->user->email }}</td>
+                            <td class="py-2 px-4">{{ $item->name }}</td>
+                            <td class="py-2 px-4">{{ $item->email }}</td>
                         </tr>
                     @empty
                         <tr>
