@@ -26,8 +26,9 @@ class Accounts extends Component
     });
 
     $loans = Cache::remember("user.{$userId}.loans", now()->addMinutes(5), function () use ($user) {
-        return $user->loans;
+        return $user->borrower()->with('borrower')->latest()->get();
     });
+
 
     return view('livewire.accounts', [
         'account' => $account,

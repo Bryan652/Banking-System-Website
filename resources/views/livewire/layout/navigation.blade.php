@@ -48,6 +48,12 @@ new class extends Component
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('transactions')" :active="request()->routeIs('transactions')" wire:navigate>
+                        {{ __('transactions') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('createAccount')" :active="request()->routeIs('createAccount')" wire:navigate>
                         {{ __('account') }}
                     </x-nav-link>

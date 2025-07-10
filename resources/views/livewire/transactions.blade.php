@@ -1,3 +1,5 @@
 <div>
-    {{-- Because she competes with no one, no one can compete with her. --}}
+    @foreach ($transactions as $item)
+        {{ $item->accounts_id}}
+    @endforeach
 </div>

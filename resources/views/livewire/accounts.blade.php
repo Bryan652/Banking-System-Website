@@ -114,7 +114,7 @@
                 <table class="min-w-full text-sm text-left text-gray-300">
                     <thead class="bg-gray-800 text-gray-200 sticky top-0">
                         <tr>
-                            <th class="py-3 px-4">Account ID</th>
+                            <th class="py-3 px-4">Borrower ID</th>
                             <th class="py-3 px-4">Amount</th>
                             <th class="py-3 px-4">Interest Rate</th>
                             <th class="py-3 px-4">Term Months</th>
@@ -124,7 +124,7 @@
                     <tbody class="divide-y divide-gray-700 bg-gray-900">
                         @foreach ($loans ?? [] as $item)
                             <tr class="hover:bg-gray-800">
-                                <td class="py-3 px-4">{{ $item->user_id }}</td>
+                                <td class="py-3 px-4">{{ $item->borrower->id }}</td>
                                 <td class="py-3 px-4">{{ number_format($item->amount, 2) }}</td>
                                 <td class="py-3 px-4">{{ $item->interest_rate }}</td>
                                 <td class="py-3 px-4">{{ $item->term_months }}</td>

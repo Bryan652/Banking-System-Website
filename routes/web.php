@@ -24,6 +24,9 @@ Route::view('createAccount', 'createAccount')
     ->middleware(['auth'])
     ->name('createAccount');
 
+Route::view('transactions', 'transactions')
+    ->middleware(['auth'])
+    ->name('transactions');
 
 // Admins
 

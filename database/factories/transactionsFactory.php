@@ -21,7 +21,7 @@ class transactionsFactory extends Factory
             'accounts_id' => accounts::factory(),
             'type' => fake()->randomElement(['Deposit', 'Withdraw', 'Transfer']),
             'amount' => fake()->randomFloat(2, 0, 99999),
-            'description' => fake()->text(),
+            'description' => fake()->randomElement(['text1', 'text2', 'text3']),
             'created_at' => now(),
         ];
     }
