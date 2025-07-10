@@ -10,6 +10,6 @@ class transactions extends Model
     use HasFactory;
 
     public function accounts() {
-        return $this->belongsToMany(accounts::class);
+        return $this->belongsTo(accounts::class);
     }
 }
