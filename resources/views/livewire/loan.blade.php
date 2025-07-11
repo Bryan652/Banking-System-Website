@@ -1,5 +1,4 @@
 <div>
-    <!-- Loan Request Form -->
     <form wire:submit.prevent="submit" class="space-y-4 bg-gray-800 p-6 rounded-lg">
         <div>
             <label class="block text-white">Amount:</label>
@@ -26,7 +25,6 @@
         @endif
     </form>
 
-    <!-- Loan Requests List -->
     <div class="mt-6 space-y-4">
         <h2 class="text-xl font-bold text-white">Your Loan Requests</h2>
 

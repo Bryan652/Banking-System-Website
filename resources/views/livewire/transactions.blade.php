@@ -1,17 +1,14 @@
 <div class="p-4 min-h-screen bg-[#0F172A] text-white font-sans">
-    {{-- Success Message --}}
     @if (session()->has('message'))
         <div class="bg-green-600 bg-opacity-20 text-green-300 p-3 rounded mb-4 border border-green-500">
             {{ session('message') }}
         </div>
     @endif
 
-    {{-- Form Container --}}
     <div class="max-w-xl mx-auto p-6 bg-[#1E293B] rounded-lg shadow">
         <h2 class="text-2xl font-semibold mb-5 text-white">Create New Transaction</h2>
 
         <form wire:submit.prevent="submit" class="space-y-5">
-            {{-- Select Account --}}
             <div>
                 <label class="block text-sm mb-1 text-gray-300 font-medium">Account</label>
                 <select wire:model="accounts_id" class="w-full bg-[#334155] text-white border border-[#475569] p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -23,7 +20,6 @@
                 @error('accounts_id') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
             </div>
 
-            {{-- Transaction Type --}}
             <div>
                 <label class="block text-sm mb-1 text-gray-300 font-medium">Type</label>
                 <select wire:model="type" class="w-full bg-[#334155] text-white border border-[#475569] p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -35,21 +31,18 @@
                 @error('type') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
             </div>
 
-            {{-- Amount --}}
             <div>
                 <label class="block text-sm mb-1 text-gray-300 font-medium">Amount</label>
                 <input type="number" wire:model="amount" step="0.01" class="w-full bg-[#334155] text-white border border-[#475569] p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 @error('amount') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
             </div>
 
-            {{-- Description --}}
             <div>
                 <label class="block text-sm mb-1 text-gray-300 font-medium">Description</label>
                 <textarea wire:model="description" rows="3" class="w-full bg-[#334155] text-white border border-[#475569] p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                 @error('description') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
             </div>
 
-            {{-- Submit --}}
             <div>
                 <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white py-2 rounded font-semibold transition">
                     Create Transaction
