@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\accounts;
 use Livewire\Component;
 use App\Models\transactions as ModelsTransactions;
 
@@ -46,8 +47,23 @@ class Transactions extends Component
             'updated_at'  => now(),
         ]);
 
+        $account = accounts::find($this->accountIds);
+
+        if($account) {
+            if($this->type == 'Deposit') {
+                $account->update([
+                    'balance' => $this->balance + $this->amount
+                ]);
+            }
+
+            if($this->type == 'withdraw') {
+                $account->update([
+                    'balance' => $this->balance - $this->amount
+                ]);
+            }
+        }
+
         session()->flash('message', 'Transaction Successful');
-        $this->reset(['accounts_id', 'type', 'amount', 'description']);
 
         session()->flash('test', 'test this shiets');
 
