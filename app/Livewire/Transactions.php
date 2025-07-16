@@ -33,6 +33,8 @@ class Transactions extends Component
 
     public function submit()
     {
+        // create a changes to amount, based on the type of transaction
+
         $this->validate();
 
         ModelsTransactions::create([
@@ -46,6 +48,10 @@ class Transactions extends Component
 
         session()->flash('message', 'Transaction Successful');
         $this->reset(['accounts_id', 'type', 'amount', 'description']);
+
+        session()->flash('test', 'test this shiets');
+
+        session()->flash('');
 
         // Refresh after submit
         $this->fetchTransaction();
