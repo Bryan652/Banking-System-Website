@@ -18,10 +18,14 @@ class Transactions extends Component
         'description' => 'required',
     ];
 
+
+
     public function mount()
     {
         $this->fetchTransaction();
     }
+
+
 
     public function fetchTransaction()
     {
@@ -32,11 +36,34 @@ class Transactions extends Component
         $this->accounts = ModelsTransactions::whereIn('accounts_id', $accountIds)->get();
         }
 
+
+
     public function submit()
     {
-        // create a changes to amount, based on the type of transaction
-
         $this->validate();
+
+        $account = accounts::find($this->accounts_id);
+
+        if(!$account) {
+            session()->flash('message', 'account not found.');
+            return;
+        }
+
+        if($this->type === 'Withdraw') {
+            if($account->balance < $this->amount) {
+                session()->flash('message', 'Invalid amount');
+                return;
+            }
+            $account->update([
+                'balance' => $account->balance - $this->amount
+            ]);
+        }
+
+        if($this->type === 'Deposit') {
+            $account->update([
+                'balance' => $account->balance + $this->amount
+            ]);
+        }
 
         ModelsTransactions::create([
             'accounts_id' => $this->accounts_id,
@@ -47,31 +74,14 @@ class Transactions extends Component
             'updated_at'  => now(),
         ]);
 
-        $account = accounts::find($this->accountIds);
-
-        if($account) {
-            if($this->type == 'Deposit') {
-                $account->update([
-                    'balance' => $this->balance + $this->amount
-                ]);
-            }
-
-            if($this->type == 'withdraw') {
-                $account->update([
-                    'balance' => $this->balance - $this->amount
-                ]);
-            }
-        }
-
         session()->flash('message', 'Transaction Successful');
-
-        session()->flash('test', 'test this shiets');
 
         session()->flash('');
 
-        // Refresh after submit
         $this->fetchTransaction();
     }
+
+
 
     public function render()
     {

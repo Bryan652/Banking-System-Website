@@ -59,6 +59,7 @@
             <table class="w-full text-left text-white">
                 <thead class="bg-[#334155] text-gray-300 text-sm uppercase tracking-wide">
                     <tr>
+                        <th class="px-4 py-2 border-b border-[#475569]">Account #</th>
                         <th class="px-4 py-2 border-b border-[#475569]">Type</th>
                         <th class="px-4 py-2 border-b border-[#475569]">Amount</th>
                         <th class="px-4 py-2 border-b border-[#475569]">Description</th>
@@ -68,6 +69,7 @@
                 <tbody class="divide-y divide-[#475569]">
                     @forelse ($accounts as $transaction)
                         <tr class="hover:bg-[#334155] transition">
+                            <td class="px-4 py-2">{{ $transaction->accounts_id }}</td>
                             <td class="px-4 py-2">{{ $transaction->type }}</td>
                             <td class="px-4 py-2">₱{{ number_format($transaction->amount, 2) }}</td>
                             <td class="px-4 py-2">{{ $transaction->description }}</td>
