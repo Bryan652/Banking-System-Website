@@ -11,12 +11,6 @@ use Livewire\Component;
 class Admin extends Component
 {
     public $search = '';
-    public $copiedSearch = '';
-
-    public function copySearch()
-    {
-        $this->copiedSearch = $this->search;
-    }
 
     public function render()
     {

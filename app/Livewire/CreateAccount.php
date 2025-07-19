@@ -37,7 +37,9 @@ class CreateAccount extends Component
         ]);
 
         session()->flash('message', 'Account created successfully!');
+
         $this->reset(['account_type', 'balance']);
+
         return redirect()->route('dashboard');
     }
 }

@@ -48,7 +48,6 @@
 
         @foreach ($account->skip(5) ?? [] as $acc)
             <tr class="hover:bg-gray-800" x-show="showAll" x-cloak>
-                <td class="py-2 px-4 font-medium">{{ $acc->user_id }}</td>
                 <td class="py-2 px-4">{{ $acc->account_number }}</td>
                 <td class="py-2 px-4">{{ $acc->account_type }}</td>
                 <td class="py-2 px-4">{{ $acc->balance }}</td>
@@ -74,12 +73,10 @@
     </div>
 
     <div class="flex mt-5 gap-4">
-        {{-- Transactions Card --}}
         <div class="flex flex-col flex-1 bg-gray-900 rounded-lg p-4">
             <div class="text-white text-lg font-semibold mb-2">Transaction</div>
 
-            {{-- Set a fixed height and enable scroll --}}
-            <div class="overflow-y-auto max-h-[10.5rem]"> {{-- 3 rows x ~4.5rem --}}
+            <div class="overflow-y-auto max-h-[10.5rem]">
                 <table class="min-w-full text-sm text-left text-gray-300">
                     <thead class="bg-gray-800 text-gray-200 sticky top-0">
                         <tr>
@@ -105,12 +102,10 @@
             </div>
         </div>
 
-        {{-- Loans Card --}}
         <div class="flex flex-col flex-1 bg-gray-900 rounded-lg p-4">
             <div class="text-white text-lg font-semibold mb-2">Loans</div>
 
-            {{-- Set a fixed height and enable scroll --}}
-            <div class="overflow-y-auto max-h-[10.5rem]"> {{-- 3 rows x ~4.5rem --}}
+            <div class="overflow-y-auto max-h-[10.5rem]">
                 <table class="min-w-full text-sm text-left text-gray-300">
                     <thead class="bg-gray-800 text-gray-200 sticky top-0">
                         <tr>

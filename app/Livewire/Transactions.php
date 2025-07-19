@@ -19,7 +19,6 @@ class Transactions extends Component
     ];
 
 
-
     public function mount()
     {
         $this->fetchTransaction();
@@ -75,8 +74,6 @@ class Transactions extends Component
         ]);
 
         session()->flash('message', 'Transaction Successful');
-
-        session()->flash('');
 
         $this->fetchTransaction();
     }

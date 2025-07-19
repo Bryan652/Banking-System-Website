@@ -13,4 +13,8 @@ class audit extends Model
     public function admin() {
         return $this->belongsTo(admins::class);
     }
+
+    public function user() {
+        return $this->belongsTo(user::class);
+    }
 }

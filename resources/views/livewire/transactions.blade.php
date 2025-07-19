@@ -51,7 +51,6 @@
         </form>
     </div>
 
-    {{-- Table --}}
     <div class="mt-10 max-w-5xl mx-auto">
         <h2 class="text-xl font-semibold mb-4 text-white">Transaction History</h2>
 

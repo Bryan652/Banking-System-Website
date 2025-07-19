@@ -17,7 +17,7 @@ class accounts extends Model
         return $this->hasMany(transactions::class);
     }
 
-    // For transactions
+
 
     public function sentTransfer() {
         return $this->hasMany(transfers::class, 'from_account_id', 'to_account_id');
@@ -31,7 +31,7 @@ class accounts extends Model
         return $this->sentTransfer->merge($this->receivedTransfer)->unique('id');
     }
 
-    // For atms
+
 
     public function atm() {
         return $this->hasMany(atm::class);

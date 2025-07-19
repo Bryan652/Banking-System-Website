@@ -30,24 +30,6 @@ class AdminLoan extends Component
         return view('livewire.admin-loan');
     }
 
-    public function submit()
-    {
-        $this->validate();
-
-        loans::create([
-            'user_id' => Auth::id(),
-            'amount' => $this->amount,
-            'interest_rate' => $this->interest_rate,
-            'term_months' => $this->term_months,
-            'status' => 'Pending',
-        ]);
-
-        session()->flash('message', 'Loan request submitted!');
-        $this->reset(['amount', 'interest_rate', 'term_months']);
-
-        $this->fetchLoans();
-    }
-
     public function approveLoan($id)
     {
         $loan = loans::findOrFail($id);
